@@ -92,8 +92,8 @@ function App() {
   )
   console.log(matrix)
   
-  const andi =(s)=>{
-    console.log(s)
+  const andi =(s, si)=>{
+    console.log(s, si)
   }
 
   return (
@@ -108,138 +108,21 @@ function App() {
       <Container>
         <Row className="p-5 ">
           <Col>
-            <Row xs={1} md={3}>
+            <Row xs={1} md={9}>
               {matrix.map((array, index)=>{
                 return (
-                  <Col key={index} onClick={(()=>andi(index))}>
-                    <Row md={3}>
+                  <Col key={index}>
+                    <Row md={9}>
                       {array.map((subarray, subindex)=>{
                         return(
-                          <Col key={subindex} className="andi">{subarray}</Col>
+                          <Col onClick={(()=>andi(index, subindex))} key={subindex} className="andi">{subarray}</Col>
                         )
                       })}
                     </Row>
                   </Col>
                 )
               })}
-              {/* <Col>
-                <Row md={3}>
-                  <Col className="andi">1</Col>
-                  <Col className="andi">1</Col>
-                  <Col className="andi">1</Col>
-                  <Col className="andi">1</Col>
-                  <Col className="andi">1</Col>
-                  <Col className="andi">1</Col>
-                  <Col className="andi">1</Col>
-                  <Col className="andi">1</Col>
-                  <Col className="andi">1</Col>
-                </Row>
-              </Col>
-              <Col>
-                <Row md={3}>
-                  <Col className="andi">1</Col>
-                  <Col className="andi">1</Col>
-                  <Col className="andi">1</Col>
-                  <Col className="andi">1</Col>
-                  <Col className="andi">1</Col>
-                  <Col className="andi">1</Col>
-                  <Col className="andi">1</Col>
-                  <Col className="andi">1</Col>
-                  <Col className="andi">1</Col>
-                </Row>
-              </Col>
-              <Col>
-                <Row md={3}>
-                  <Col className="andi">1</Col>
-                  <Col className="andi">1</Col>
-                  <Col className="andi">1</Col>
-                  <Col className="andi">1</Col>
-                  <Col className="andi">1</Col>
-                  <Col className="andi">1</Col>
-                  <Col className="andi">1</Col>
-                  <Col className="andi">1</Col>
-                  <Col className="andi">1</Col>
-                </Row>
-              </Col>
-              <Col>
-                <Row md={3}>
-                  <Col className=" andi">1</Col>
-                  <Col className=" andi">1</Col>
-                  <Col className=" andi">1</Col>
-                  <Col className=" andi">1</Col>
-                  <Col className=" andi">1</Col>
-                  <Col className=" andi">1</Col>
-                  <Col className=" andi">1</Col>
-                  <Col className=" andi">1</Col>
-                  <Col className=" andi">1</Col>
-                </Row>
-              </Col>
-              <Col>
-                <Row md={3}>
-                  <Col className="andi">1</Col>
-                  <Col className="andi">1</Col>
-                  <Col className="andi">1</Col>
-                  <Col className="andi">1</Col>
-                  <Col className="andi">1</Col>
-                  <Col className="andi">1</Col>
-                  <Col className="andi">1</Col>
-                  <Col className="andi">1</Col>
-                  <Col className="andi">1</Col>
-                </Row>
-              </Col>
-              <Col>
-                <Row md={3}>
-                  <Col className="andi">1</Col>
-                  <Col className="andi">1</Col>
-                  <Col className="andi">1</Col>
-                  <Col className="andi">1</Col>
-                  <Col className="andi">1</Col>
-                  <Col className="andi">1</Col>
-                  <Col className="andi">1</Col>
-                  <Col className="andi">1</Col>
-                  <Col className="andi">1</Col>
-                </Row>
-              </Col>
-              <Col>
-                <Row md={3}>
-                  <Col className="andi">1</Col>
-                  <Col className="andi">1</Col>
-                  <Col className="andi">1</Col>
-                  <Col className="andi">1</Col>
-                  <Col className="andi">1</Col>
-                  <Col className="andi">1</Col>
-                  <Col className="andi">1</Col>
-                  <Col className="andi">1</Col>
-                  <Col className="andi">1</Col>
-                </Row>
-              </Col>
-              <Col>
-                <Row md={3}>
-                  <Col className="andi">1</Col>
-                  <Col className="andi">1</Col>
-                  <Col className="andi">1</Col>
-                  <Col className="andi">1</Col>
-                  <Col className="andi">1</Col>
-                  <Col className="andi">1</Col>
-                  <Col className="andi">1</Col>
-                  <Col className="andi">1</Col>
-                  <Col className="andi">1</Col>
-                </Row>
-              </Col>
-              <Col>
-                <Row md={3}>
-                  <Col className="andi">1</Col>
-                  <Col className="andi">1</Col>
-                  <Col className="andi">1</Col>
-                  <Col className="andi">1</Col>
-                  <Col className="andi">1</Col>
-                  <Col className="andi">1</Col>
-                  <Col className="andi">1</Col>
-                  <Col className="andi">1</Col>
-                  <Col className="andi">1</Col>
-                </Row>
-              </Col> */}
-            </Row>
+              </Row>
           </Col>
           <Col></Col>
         </Row>

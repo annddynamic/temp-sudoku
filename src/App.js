@@ -75,26 +75,141 @@ function App() {
   //   clearTimer(getDeadTime());
   // };
 
-
   // const [matrix, setMatrix] = useState(Array(9).fill(Array(9)))
-  const [matrix, setMatrix] = useState(
+  const [matrix, setMatrix] = useState([
     [
-      [{v:0, isClicked:false},0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0,0]
-    ]
-  )
-  console.log(matrix)
-  
-  const andi =(s, si)=>{
-    console.log(s, si)
-    setClicked(!isClicked)
+      { v: 0, isClicked: true },
+      { v: 0, isClicked: false },
+      { v: 0, isClicked: false },
+      { v: 0, isClicked: false },
+      { v: 0, isClicked: false },
+      { v: 0, isClicked: false },
+      { v: 0, isClicked: false },
+      { v: 0, isClicked: false },
+      { v: 0, isClicked: false },
+    ],
+    [
+      { v: 0, isClicked: false },
+      { v: 0, isClicked: false },
+      { v: 0, isClicked: false },
+      { v: 0, isClicked: false },
+      { v: 0, isClicked: false },
+      { v: 0, isClicked: false },
+      { v: 0, isClicked: false },
+      { v: 0, isClicked: false },
+      { v: 0, isClicked: false },
+    ],
+    [
+      { v: 0, isClicked: false },
+      { v: 0, isClicked: false },
+      { v: 0, isClicked: false },
+      { v: 0, isClicked: false },
+      { v: 0, isClicked: false },
+      { v: 0, isClicked: false },
+      { v: 0, isClicked: false },
+      { v: 0, isClicked: false },
+      { v: 0, isClicked: false },
+    ],
+    [
+      { v: 0, isClicked: false },
+      { v: 0, isClicked: false },
+      { v: 0, isClicked: false },
+      { v: 0, isClicked: false },
+      { v: 0, isClicked: false },
+      { v: 0, isClicked: false },
+      { v: 0, isClicked: false },
+      { v: 0, isClicked: false },
+      { v: 0, isClicked: false },
+    ],
+    [
+      { v: 0, isClicked: false },
+      { v: 0, isClicked: false },
+      { v: 0, isClicked: false },
+      { v: 0, isClicked: false },
+      { v: 0, isClicked: false },
+      { v: 0, isClicked: false },
+      { v: 0, isClicked: false },
+      { v: 0, isClicked: false },
+      { v: 0, isClicked: false },
+    ],
+    [
+      { v: 0, isClicked: false },
+      { v: 0, isClicked: false },
+      { v: null, isClicked: false },
+      { v: 0, isClicked: false },
+      { v: 0, isClicked: false },
+      { v: 0, isClicked: false },
+      { v: 0, isClicked: false },
+      { v: 0, isClicked: false },
+      { v: 0, isClicked: false },
+    ],
+    [
+      { v: 0, isClicked: false },
+      { v: 0, isClicked: false },
+      { v: 0, isClicked: false },
+      { v: 0, isClicked: false },
+      { v: 0, isClicked: false },
+      { v: 0, isClicked: false },
+      { v: 0, isClicked: false },
+      { v: 0, isClicked: false },
+      { v: 0, isClicked: false },
+    ],
+    [
+      { v: 0, isClicked: false },
+      { v: 0, isClicked: false },
+      { v: 0, isClicked: false },
+      { v: 0, isClicked: false },
+      { v: 0, isClicked: false },
+      { v: 0, isClicked: false },
+      { v: 0, isClicked: false },
+      { v: 0, isClicked: false },
+      { v: 0, isClicked: false },
+    ],
+    [
+      { v: 0, isClicked: false },
+      { v: 0, isClicked: false },
+      { v: 0, isClicked: false },
+      { v: 0, isClicked: false },
+      { v: 0, isClicked: false },
+      { v: 0, isClicked: false },
+      { v: 0, isClicked: false },
+      { v: 0, isClicked: false },
+      { v: 0, isClicked: false },
+    ],
+  ]);
+  console.log(matrix);
+
+  const select = (a , b) => {
+    clearPreviousSelectedCell()
+    selectCell(a,b)
+  };
+
+  const clearPreviousSelectedCell = ()=>{
+    let newState=[]
+    for(let i=0; i<matrix.length; i++){
+      for(let j=0; j<matrix.length; j++){
+        if(matrix[i][j].isClicked){
+          matrix[i][j].isClicked=!matrix[i][j].isClicked
+        }
+      }
+      newState.push(matrix[i])
+    }
+    setMatrix(newState)
+  }
+
+  const selectCell= (a, b)=>{
+    let newState=[]
+    for(let i=0; i<matrix.length; i++){
+      if(i===a){
+        for(let j=0; j<matrix.length; j++){
+          if(j ===b){
+            matrix[i][j].isClicked=!matrix[i][j].isClicked
+          }
+        }
+      }
+      newState.push(matrix[i])
+    }
+    setMatrix(newState)
   }
 
   return (
@@ -109,19 +224,25 @@ function App() {
       <Container>
         <Row className="p-5 ">
           <Col>
-            <Row style={{cursor:"pointer"}} xs={1} md={9}>
-              {matrix.map((array, index)=>{
+            <Row style={{ cursor: "pointer" }} xs={1} md={9}>
+              {matrix.map((row, i) => {
                 return (
-                  <Col key={index}>
+                  <Col key={i}>
                     <Row md={9}>
-                      {array.map((subarray, subindex)=>{
-                        return(
-                          <Col onClick={(()=>andi(index, subindex))} key={subindex} className={`andi ${isClicked ? 'clicked': ''}`}>{subarray}</Col>
-                        )
+                      {row.map((column, j) => {
+                        return (
+                          <Col
+                            onClick={() => select(i, j)}
+                            key={j}
+                            className={`andi ${column.isClicked ? "clicked" : ""}`}
+                          >
+                            {column.v}
+                          </Col>
+                        );
                       })}
                     </Row>
                   </Col>
-                )
+                );
               })}
             </Row>
           </Col>

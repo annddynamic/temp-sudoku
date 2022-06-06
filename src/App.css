@@ -32,3 +32,8 @@
   padding: 18px;
   /* height: 60px !important; */
 }
+
+.clicked {
+  background-color: #f4f4f4;
+  /* height: 60px !important; */
+}

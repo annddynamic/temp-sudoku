@@ -89,10 +89,20 @@ function App() {
     [0,0,0,0,0,0,0,0,0],
   ]
 
+
   Sudoku.fillDiagonal(board)
   Sudoku.solveBoard(board)
 
-  const [matrix, setMatrix]= useState(board)
+  var solvedSudoku = [];
+
+  for (var i = 0; i < board.length; i++)
+      solvedSudoku[i] = board[i].slice();
+  
+  
+  Sudoku.removeKDigits(30, solvedSudoku)
+  console.log(board)
+
+  const [matrix, setMatrix]= useState(solvedSudoku)
 
   // const [matrix, setMatrix] = useState([
   //   [

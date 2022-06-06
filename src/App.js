@@ -2,7 +2,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import React, { useState, useRef, useEffect } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
-import Sudoku, { randomGenerator } from "./functions";
+import Sudoku, { randomGenerator } from "./sudoku";
 
 function App() {
   const Ref = useRef(null);
@@ -76,148 +76,161 @@ function App() {
   //   clearTimer(getDeadTime());
   // };
 
-  // const [matrix, setMatrix] = useState(Array(9).fill(Array(9)))
-   console.log(Sudoku.randomNumberGenerator(4))
 
+  let board = [
+    [0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0],
+    [0,0,0,0,0,0,0,0,0],
+  ]
 
+  Sudoku.fillDiagonal(board)
+  Sudoku.solveBoard(board)
 
-  const [matrix, setMatrix] = useState([
-    [
-      { v: 0, isClicked: true },
-      { v: 0, isClicked: false },
-      { v: 0, isClicked: false },
-      { v: 0, isClicked: false },
-      { v: 0, isClicked: false },
-      { v: 0, isClicked: false },
-      { v: 0, isClicked: false },
-      { v: 0, isClicked: false },
-      { v: 0, isClicked: false },
-    ],
-    [
-      { v: 0, isClicked: false },
-      { v: 0, isClicked: false },
-      { v: 0, isClicked: false },
-      { v: 0, isClicked: false },
-      { v: 0, isClicked: false },
-      { v: 0, isClicked: false },
-      { v: 0, isClicked: false },
-      { v: 0, isClicked: false },
-      { v: 0, isClicked: false },
-    ],
-    [
-      { v: 9, isClicked: false },
-      { v: 0, isClicked: false },
-      { v: 0, isClicked: false },
-      { v: 0, isClicked: false },
-      { v: 0, isClicked: false },
-      { v: 0, isClicked: false },
-      { v: 0, isClicked: false },
-      { v: 0, isClicked: false },
-      { v: 0, isClicked: false },
-    ],
-    [
-      { v: 0, isClicked: false },
-      { v: 0, isClicked: false },
-      { v: 0, isClicked: false },
-      { v: 0, isClicked: false },
-      { v: 0, isClicked: false },
-      { v: 0, isClicked: false },
-      { v: 0, isClicked: false },
-      { v: 0, isClicked: false },
-      { v: 0, isClicked: false },
-    ],
-    [
-      { v: 0, isClicked: false },
-      { v: 0, isClicked: false },
-      { v: 0, isClicked: false },
-      { v: 0, isClicked: false },
-      { v: 0, isClicked: false },
-      { v: 0, isClicked: false },
-      { v: 0, isClicked: false },
-      { v: 0, isClicked: false },
-      { v: 0, isClicked: false },
-    ],
-    [
-      { v: 0, isClicked: false },
-      { v: 0, isClicked: false },
-      { v: null, isClicked: false },
-      { v: 0, isClicked: false },
-      { v: 0, isClicked: false },
-      { v: 0, isClicked: false },
-      { v: 0, isClicked: false },
-      { v: 0, isClicked: false },
-      { v: 0, isClicked: false },
-    ],
-    [
-      { v: 0, isClicked: false },
-      { v: 0, isClicked: false },
-      { v: 0, isClicked: false },
-      { v: 0, isClicked: false },
-      { v: 0, isClicked: false },
-      { v: 0, isClicked: false },
-      { v: 0, isClicked: false },
-      { v: 0, isClicked: false },
-      { v: 0, isClicked: false },
-    ],
-    [
-      { v: 0, isClicked: false },
-      { v: 0, isClicked: false },
-      { v: 0, isClicked: false },
-      { v: 0, isClicked: false },
-      { v: 0, isClicked: false },
-      { v: 0, isClicked: false },
-      { v: 0, isClicked: false },
-      { v: 0, isClicked: false },
-      { v: 0, isClicked: false },
-    ],
-    [
-      { v: 0, isClicked: false },
-      { v: 0, isClicked: false },
-      { v: 0, isClicked: false },
-      { v: 0, isClicked: false },
-      { v: 0, isClicked: false },
-      { v: 0, isClicked: false },
-      { v: 0, isClicked: false },
-      { v: 0, isClicked: false },
-      { v: 0, isClicked: false },
-    ],
-  ]);
-  // console.log(matrix);
+  const [matrix, setMatrix]= useState(board)
+
+  // const [matrix, setMatrix] = useState([
+  //   [
+  //     { v: 0, isClicked: true },
+  //     { v: 0, isClicked: false },
+  //     { v: 0, isClicked: false },
+  //     { v: 0, isClicked: false },
+  //     { v: 0, isClicked: false },
+  //     { v: 0, isClicked: false },
+  //     { v: 0, isClicked: false },
+  //     { v: 0, isClicked: false },
+  //     { v: 0, isClicked: false },
+  //   ],
+  //   [
+  //     { v: 0, isClicked: false },
+  //     { v: 0, isClicked: false },
+  //     { v: 0, isClicked: false },
+  //     { v: 0, isClicked: false },
+  //     { v: 0, isClicked: false },
+  //     { v: 0, isClicked: false },
+  //     { v: 0, isClicked: false },
+  //     { v: 0, isClicked: false },
+  //     { v: 0, isClicked: false },
+  //   ],
+  //   [
+  //     { v: 9, isClicked: false },
+  //     { v: 0, isClicked: false },
+  //     { v: 0, isClicked: false },
+  //     { v: 0, isClicked: false },
+  //     { v: 0, isClicked: false },
+  //     { v: 0, isClicked: false },
+  //     { v: 0, isClicked: false },
+  //     { v: 0, isClicked: false },
+  //     { v: 0, isClicked: false },
+  //   ],
+  //   [
+  //     { v: 0, isClicked: false },
+  //     { v: 0, isClicked: false },
+  //     { v: 0, isClicked: false },
+  //     { v: 0, isClicked: false },
+  //     { v: 0, isClicked: false },
+  //     { v: 0, isClicked: false },
+  //     { v: 0, isClicked: false },
+  //     { v: 0, isClicked: false },
+  //     { v: 0, isClicked: false },
+  //   ],
+  //   [
+  //     { v: 0, isClicked: false },
+  //     { v: 0, isClicked: false },
+  //     { v: 0, isClicked: false },
+  //     { v: 0, isClicked: false },
+  //     { v: 0, isClicked: false },
+  //     { v: 0, isClicked: false },
+  //     { v: 0, isClicked: false },
+  //     { v: 0, isClicked: false },
+  //     { v: 0, isClicked: false },
+  //   ],
+  //   [
+  //     { v: 0, isClicked: false },
+  //     { v: 0, isClicked: false },
+  //     { v: null, isClicked: false },
+  //     { v: 0, isClicked: false },
+  //     { v: 0, isClicked: false },
+  //     { v: 0, isClicked: false },
+  //     { v: 0, isClicked: false },
+  //     { v: 0, isClicked: false },
+  //     { v: 0, isClicked: false },
+  //   ],
+  //   [
+  //     { v: 0, isClicked: false },
+  //     { v: 0, isClicked: false },
+  //     { v: 0, isClicked: false },
+  //     { v: 0, isClicked: false },
+  //     { v: 0, isClicked: false },
+  //     { v: 0, isClicked: false },
+  //     { v: 0, isClicked: false },
+  //     { v: 0, isClicked: false },
+  //     { v: 0, isClicked: false },
+  //   ],
+  //   [
+  //     { v: 0, isClicked: false },
+  //     { v: 0, isClicked: false },
+  //     { v: 0, isClicked: false },
+  //     { v: 0, isClicked: false },
+  //     { v: 0, isClicked: false },
+  //     { v: 0, isClicked: false },
+  //     { v: 0, isClicked: false },
+  //     { v: 0, isClicked: false },
+  //     { v: 0, isClicked: false },
+  //   ],
+  //   [
+  //     { v: 0, isClicked: false },
+  //     { v: 0, isClicked: false },
+  //     { v: 0, isClicked: false },
+  //     { v: 0, isClicked: false },
+  //     { v: 0, isClicked: false },
+  //     { v: 0, isClicked: false },
+  //     { v: 0, isClicked: false },
+  //     { v: 0, isClicked: false },
+  //     { v: 0, isClicked: false },
+  //   ],
+  // ]);
+  // // console.log(matrix);
 
   const select = (a , b) => {
-    // console.log(a,b)
-    clearPreviousSelectedCell()
-    selectCell(a,b)
+    console.log(a,b)
+    // clearPreviousSelectedCell()
+    // selectCell(a,b)
   };
 
-  const clearPreviousSelectedCell = ()=>{
-    let newState=[]
-    for(let i=0; i<matrix.length; i++){
-      for(let j=0; j<matrix.length; j++){
-        if(matrix[i][j].isClicked){
-          matrix[i][j].isClicked=!matrix[i][j].isClicked
-        }
-      }
-      newState.push(matrix[i])
-    }
-    setMatrix(newState)
-  }
+  // const clearPreviousSelectedCell = ()=>{
+  //   let newState=[]
+  //   for(let i=0; i<matrix.length; i++){
+  //     for(let j=0; j<matrix.length; j++){
+  //       if(matrix[i][j].isClicked){
+  //         matrix[i][j].isClicked=!matrix[i][j].isClicked
+  //       }
+  //     }
+  //     newState.push(matrix[i])
+  //   }
+  //   setMatrix(newState)
+  // }
 
-  const selectCell= (a, b)=>{
+  // const selectCell= (a, b)=>{
 
-    let newState=[]
-    for(let i=0; i<matrix.length; i++){
-      if(i===a){
-        for(let j=0; j<matrix.length; j++){
-          if(j ===b){
-            matrix[i][j].isClicked=!matrix[i][j].isClicked
-          }
-        }
-      }
-      newState.push(matrix[i])
-    }
-    setMatrix(newState)
-  }
+  //   let newState=[]
+  //   for(let i=0; i<matrix.length; i++){
+  //     if(i===a){
+  //       for(let j=0; j<matrix.length; j++){
+  //         if(j ===b){
+  //           matrix[i][j].isClicked=!matrix[i][j].isClicked
+  //         }
+  //       }
+  //     }
+  //     newState.push(matrix[i])
+  //   }
+  //   setMatrix(newState)
+  // }
 
 
   // initialize numbers array
@@ -251,9 +264,9 @@ function App() {
                           <Col
                             onClick={() => select(i, j)}
                             key={j}
-                            className={`default ${column.isClicked ? "clicked" : ""}`}
+                            className={`default`}
                           >
-                            {column.v}
+                            {column}
                           </Col>
                         );
                       })}

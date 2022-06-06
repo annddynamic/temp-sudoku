@@ -1,7 +1,10 @@
 
 const Sudoku = (function () {
+
+
     const GRIDSIZE=9;
 
+   
     function randomNumberGenerator(n) {
         return  Math.floor(Math.random()*n+1)
     }
@@ -77,8 +80,55 @@ const Sudoku = (function () {
                 !isNumberInColumn(board,number,column)
     }
 
+    function solveBoard(board) {
+        for (let row = 0; row < GRIDSIZE; row++) {
+            for (let column = 0; column < GRIDSIZE; column++) {
+                if (board[row][column] == 0) {
+                    for (let numberToTry = 1; numberToTry <= GRIDSIZE; numberToTry++) {
+                        if (isValidPlacement(board, numberToTry, row, column)) {
+                            board[row][column] = numberToTry;
+                            if (solveBoard(board)) {
+                                return true;
+                            }
+                            else {
+                                board[row][column] = 0;
+                            }
+                        }
+                    }
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    function removeKDigits(k, board)
+    {
+        let count = k;
+        while (count != 0)
+        {
+            let cellId = randomNumberGenerator(GRIDSIZE*GRIDSIZE)-1;
+
+            // System.out.println(cellId);
+            // extract coordinates i and j
+            let i = (cellId/GRIDSIZE);
+            let j = cellId%9;
+            if (j != 0)
+                j = j - 1;
+
+            // System.out.println(i+" "+j);
+            if (board[i][j] != 0)
+            {
+                count--;
+                board[i][j] = 0;
+            }
+        }
+    }
+
     return {
+       fillDiagonal,
        randomNumberGenerator,
+       solveBoard,
     };
 })();
 

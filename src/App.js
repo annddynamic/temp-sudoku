@@ -1,7 +1,8 @@
 import logo from "./logo.svg";
 import "./App.css";
 import React, { useState, useRef, useEffect } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Button } from "react-bootstrap";
+import Sudoku, { randomGenerator } from "./functions";
 
 function App() {
   const Ref = useRef(null);
@@ -76,6 +77,10 @@ function App() {
   // };
 
   // const [matrix, setMatrix] = useState(Array(9).fill(Array(9)))
+   console.log(Sudoku.randomNumberGenerator(4))
+
+
+
   const [matrix, setMatrix] = useState([
     [
       { v: 0, isClicked: true },
@@ -100,7 +105,7 @@ function App() {
       { v: 0, isClicked: false },
     ],
     [
-      { v: 0, isClicked: false },
+      { v: 9, isClicked: false },
       { v: 0, isClicked: false },
       { v: 0, isClicked: false },
       { v: 0, isClicked: false },
@@ -177,9 +182,10 @@ function App() {
       { v: 0, isClicked: false },
     ],
   ]);
-  console.log(matrix);
+  // console.log(matrix);
 
   const select = (a , b) => {
+    // console.log(a,b)
     clearPreviousSelectedCell()
     selectCell(a,b)
   };
@@ -198,6 +204,7 @@ function App() {
   }
 
   const selectCell= (a, b)=>{
+
     let newState=[]
     for(let i=0; i<matrix.length; i++){
       if(i===a){
@@ -212,6 +219,16 @@ function App() {
     setMatrix(newState)
   }
 
+
+  // initialize numbers array
+  const[numbers, setNumbers]= useState(
+    [1,2,3,4,5,6,7,8,9]
+  )
+
+  const nita = (numbers)=>{
+    console.log(numbers)
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -224,17 +241,17 @@ function App() {
       <Container>
         <Row className="p-5 ">
           <Col>
-            <Row style={{ cursor: "pointer" }} xs={1} md={9}>
+            <Row style={{ cursor: "pointer", border:"1px solid #61dafb" }} xs={1} md={9}>
               {matrix.map((row, i) => {
                 return (
-                  <Col key={i}>
-                    <Row md={9}>
+                  <Col  key={i}>
+                    <Row  md={9}>
                       {row.map((column, j) => {
                         return (
                           <Col
                             onClick={() => select(i, j)}
                             key={j}
-                            className={`andi ${column.isClicked ? "clicked" : ""}`}
+                            className={`default ${column.isClicked ? "clicked" : ""}`}
                           >
                             {column.v}
                           </Col>
@@ -246,7 +263,20 @@ function App() {
               })}
             </Row>
           </Col>
-          <Col></Col>
+          <Col>
+              <Container>
+                <Button className="form-control">New Game</Button>
+                <Row md={3}>
+                  {numbers.map((number)=>{
+                    return(
+                      <Col onClick={()=>nita(number)} key={number} className="moves">
+                        {number}
+                      </Col>
+                    )
+                  })}
+                </Row>
+              </Container>
+          </Col>
         </Row>
       </Container>
     </div>

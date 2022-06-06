@@ -27,13 +27,19 @@
   }
 }
 
-.andi {
+.default {
   border: 1px solid #61dafb;
   padding: 16px;
-  /* height: 60px !important; */
 }
 
 .clicked {
-  background-color: #f4f4f4;
-  /* height: 60px !important; */
+  background-color: lightgrey;
+}
+
+.moves{
+  cursor: pointer;
+  padding: 60px;
+  border: 1px solid #61dafb;
+  background-color:white;
+  
 }

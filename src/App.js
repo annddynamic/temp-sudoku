@@ -1,23 +1,22 @@
 import logo from "./logo.svg";
 import "./App.css";
 import React, { useState, useRef, useEffect } from "react";
-import { Container, Row, Col, Button, Alert } from "react-bootstrap";
+import { Container, Row, Col, Button, Alert, Dropdown } from "react-bootstrap";
 import Sudoku, { randomGenerator } from "./sudoku";
-// per easy 30
-// per medium 40
-// per hard 55
+
+
 function App() {
   const [cords, setCords] = useState([]);
 
   useEffect(() => {
-    Sudoku.newGame();
+    Sudoku.newGame(30);
     setBoard(Sudoku.getSolvedBoard());
     setMatrix(Sudoku.getUnsolvedBoard());
     setLifes(5);
-    setToFind(2)
+    setToFind(2);
   }, []);
 
-  const [toFind, setToFind]= useState()
+  const [toFind, setToFind] = useState();
   const [matrix, setMatrix] = useState([]);
   const [board, setBoard] = useState([]);
   const [lifes, setLifes] = useState();
@@ -52,15 +51,15 @@ function App() {
       // check if cordinates are set
       if (cords.length === 2) {
         //check if cell is set
-        if(matrix[cords[0]][cords[1]]===null){
+        if (matrix[cords[0]][cords[1]] === null) {
           if (board[cords[0]][cords[1]] === number) {
             appendToSolvedSudoku(cords[0], cords[1], number);
             setToFind((prevState) => prevState - 1);
-            if(toFind ===1){
+            if (toFind === 1) {
               console.log("Bac u kry");
-              setShow(true)
+              setShow(true);
               setMessage("Correct");
-              setGuess("success")
+              setGuess("success");
             }
           } else {
             // tell user wrong answer
@@ -70,25 +69,32 @@ function App() {
             }
             // game over
             setLifes((prevState) => prevState - 1);
-  
+
             setShow(true);
             setMessage("Mut e ki bo");
-            setGuess("danger")
-  
+            setGuess("danger");
           }
         } else {
           // tell user to select box
           setShow(true);
           setMessage("Select an empty box in order to play");
-          setGuess("danger")
+          setGuess("danger");
         }
-        }
-        // check if correct
-       
+      }
     }
   };
-  const newGame = () => {
-    Sudoku.newGame();
+
+  const newGame = (currentDifficulty) => {
+    Sudoku.newGame(currentDifficulty);
+    setBoard(Sudoku.getSolvedBoard());
+    setMatrix(Sudoku.getUnsolvedBoard());
+    setLifes(5);
+  };
+
+  const changeDifficulty = (difficulty) => {
+    console.log(difficulty)
+    setCurrentDifficulty(difficulty)
+    Sudoku.newGame(difficulty);
     setBoard(Sudoku.getSolvedBoard());
     setMatrix(Sudoku.getUnsolvedBoard());
     setLifes(5);
@@ -96,18 +102,29 @@ function App() {
 
   const [show, setShow] = useState(false);
   const [message, setMessage] = useState("");
-  const [guess, setGuess] = useState("danger")
+  const [guess, setGuess] = useState("danger");
+  const [currentDifficulty, setCurrentDifficulty]= useState()
 
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
+        <div>Lifes left: {lifes} out of 5</div>
         <div>
-          <button>Reset</button>
+          <Dropdown>
+            <Dropdown.Toggle variant="success" id="dropdown-basic">
+              Difficulty
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu>
+              <Dropdown.Item onClick={()=>changeDifficulty(30)} >Easy</Dropdown.Item>
+              <Dropdown.Item onClick={()=>changeDifficulty(40)} >Medium</Dropdown.Item>
+              <Dropdown.Item onClick={()=>changeDifficulty(55)} >Hard</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
         </div>
       </header>
       <Container>
-        <div>Lifes left: {lifes} out of 5</div>
         <Row className="p-5 ">
           <Col>
             <Row
@@ -142,7 +159,7 @@ function App() {
           </Col>
           <Col>
             <Container>
-              <Button className="form-control " onClick={newGame}>
+              <Button className="form-control " onClick={()=>newGame(currentDifficulty)}>
                 New Game
               </Button>
               <Row md={3}>
@@ -160,9 +177,9 @@ function App() {
               </Row>
             </Container>
           </Col>
-              <Alert show={show} variant={guess}>
-                <Alert.Heading>{message}</Alert.Heading>
-              </Alert>
+          <Alert show={show} variant={guess}>
+            <Alert.Heading>{message}</Alert.Heading>
+          </Alert>
         </Row>
       </Container>
     </div>

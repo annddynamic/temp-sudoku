@@ -14,8 +14,10 @@ function App() {
     setBoard(Sudoku.getSolvedBoard());
     setMatrix(Sudoku.getUnsolvedBoard());
     setLifes(5);
+    setToFind(2)
   }, []);
 
+  const [toFind, setToFind]= useState()
   const [matrix, setMatrix] = useState([]);
   const [board, setBoard] = useState([]);
   const [lifes, setLifes] = useState();
@@ -46,13 +48,12 @@ function App() {
       //Iterate through all elements in second array
       for (var y = 0; y < arr2.length; y++) {
         if (arr1[x][0] == arr2[y][0] && arr1[x][1] == arr2[y][1]) {
-          console.log("Bac u kry!");
-          setShow(true)
-          setMessage("Correct");
-          setGuess("success")
+          return true
+         
         }
       }
     }
+    return false
   }
   // initialize numbers array
   const [numbers, setNumbers] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9]);
@@ -66,8 +67,14 @@ function App() {
         // check if correct
         if (board[cords[0]][cords[1]] === number) {
           appendToSolvedSudoku(cords[0], cords[1], number);
-          if (arraysAreIdentical(matrix, board)) {
-            console.log("AAAAAAA");
+          setToFind((prevState) => prevState - 1);
+          if(toFind ===1){
+            if (arraysAreIdentical(matrix, board)) {
+              console.log("Bac u kry");
+              setShow(true)
+              setMessage("Correct");
+              setGuess("success")
+            }
           }
         } else {
           // tell user wrong answer

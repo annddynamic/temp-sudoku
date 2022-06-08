@@ -30,7 +30,7 @@ const Sudoku = (function () {
         }
           
           
-        removeKDigits(1, unSolvedBoard)
+        removeKDigits(2, unSolvedBoard)
         
         for(let i=0; i<9; i++){
             for(let j=0; j<9; j++){

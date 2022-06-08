@@ -12,8 +12,9 @@ function App() {
     Sudoku.newGame(30);
     setBoard(Sudoku.getSolvedBoard());
     setMatrix(Sudoku.getUnsolvedBoard());
+    setCurrentDifficulty(30)
+    setToFind(30);
     setLifes(5);
-    setToFind(2);
   }, []);
 
   const [toFind, setToFind] = useState();
@@ -86,6 +87,7 @@ function App() {
 
   const newGame = (currentDifficulty) => {
     Sudoku.newGame(currentDifficulty);
+    setToFind(currentDifficulty)
     setBoard(Sudoku.getSolvedBoard());
     setMatrix(Sudoku.getUnsolvedBoard());
     setLifes(5);
@@ -95,9 +97,11 @@ function App() {
     console.log(difficulty)
     setCurrentDifficulty(difficulty)
     Sudoku.newGame(difficulty);
+    setToFind(difficulty)
     setBoard(Sudoku.getSolvedBoard());
     setMatrix(Sudoku.getUnsolvedBoard());
     setLifes(5);
+
   };
 
   const [show, setShow] = useState(false);
@@ -117,9 +121,9 @@ function App() {
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
-              <Dropdown.Item onClick={()=>changeDifficulty(30)} >Easy</Dropdown.Item>
-              <Dropdown.Item onClick={()=>changeDifficulty(40)} >Medium</Dropdown.Item>
-              <Dropdown.Item onClick={()=>changeDifficulty(55)} >Hard</Dropdown.Item>
+              <Dropdown.Item onClick={()=>changeDifficulty(1)} >Easy</Dropdown.Item>
+              <Dropdown.Item onClick={()=>changeDifficulty(2)} >Medium</Dropdown.Item>
+              <Dropdown.Item onClick={()=>changeDifficulty(3)} >Hard</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
         </div>

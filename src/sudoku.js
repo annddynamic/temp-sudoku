@@ -4,6 +4,52 @@ const Sudoku = (function () {
 
     const GRIDSIZE=9;
 
+      
+    function newGame(){
+
+        let unSolvedBoard=[]
+        let board = [
+            [0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0],
+        ]
+        fillDiagonal(board)
+        console.log("a")
+        solveBoard(board)
+        
+        for (var i = 0; i < board.length; i++){
+            unSolvedBoard[i] = board[i].slice();
+        }
+          
+          
+        removeKDigits(30, unSolvedBoard)
+        
+        for(let i=0; i<9; i++){
+            for(let j=0; j<9; j++){
+                if(unSolvedBoard[i][j]===0){
+                    unSolvedBoard[i][j]=null
+                }
+            }
+        }
+
+        let arr = [board, unSolvedBoard]
+
+        return arr
+    }
+
+    // function getSolvedBoard(){
+    //     return board
+    // }
+
+    // function getUnsolvedBoard(){
+    //     return unSolvedBoard
+    // }
    
     function randomNumberGenerator(n) {
         return  Math.floor(Math.random()*n+1)
@@ -130,6 +176,7 @@ const Sudoku = (function () {
        randomNumberGenerator,
        solveBoard,
        removeKDigits,
+       newGame,
     };
 })();
 

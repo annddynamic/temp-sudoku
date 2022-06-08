@@ -5,115 +5,55 @@ import { Container, Row, Col, Button } from "react-bootstrap";
 import Sudoku, { randomGenerator } from "./sudoku";
 
 function App() {
-  const Ref = useRef(null);
 
-  // // The state for our timer
-  const [timer, setTimer] = useState("00:00:00");
   const [cords, setCords] = useState([])
 
-// setSelectedCell([i,j])
-  const getTimeRemaining = (e) => {
-    const total = Date.parse(e) - Date.parse(new Date());
-    const seconds = Math.floor((total / 1000) % 60);
-    const minutes = Math.floor((total / 1000 / 60) % 60);
-    const hours = Math.floor((total / 1000 / 60 / 60) % 24);
-    return {
-      total,
-      hours,
-      minutes,
-      seconds,
-    };
-  };
 
-  // const startTimer = (e) => {
-  //   let { total, hours, minutes, seconds } = getTimeRemaining(e);
-  //   if (total >= 0) {
-  //     // update the timer
-  //     // check if less than 10 then we need to
-  //     // add '0' at the begining of the variable
-  //     setTimer(
-  //       (hours > 9 ? hours : "0" + hours) +
-  //         ":" +
-  //         (minutes > 9 ? minutes : "0" + minutes) +
-  //         ":" +
-  //         (seconds > 9 ? seconds : "0" + seconds)
-  //     );
+
+
+  // let board = [
+  //   [0,0,0,0,0,0,0,0,0],
+  //   [0,0,0,0,0,0,0,0,0],
+  //   [0,0,0,0,0,0,0,0,0],
+  //   [0,0,0,0,0,0,0,0,0],
+  //   [0,0,0,0,0,0,0,0,0],
+  //   [0,0,0,0,0,0,0,0,0],
+  //   [0,0,0,0,0,0,0,0,0],
+  //   [0,0,0,0,0,0,0,0,0],
+  //   [0,0,0,0,0,0,0,0,0],
+  // ]
+
+
+  // Sudoku.fillDiagonal(board)
+  // Sudoku.solveBoard(board)
+
+  // var solvedSudoku = [];
+
+  // for (var i = 0; i < board.length; i++)
+  //     solvedSudoku[i] = board[i].slice();
+  
+  
+  // Sudoku.removeKDigits(30, solvedSudoku)
+  // console.log(board)
+
+  // for(let i=0; i<9; i++){
+  //   for(let j=0; j<9; j++){
+  //     if(solvedSudoku[i][j]===0){
+  //       solvedSudoku[i][j]=null
+  //     }
   //   }
-  // };
+  // }
+  useEffect(()=>{
+    // console.log("useeffect")
+    let arr =Sudoku.newGame()
 
-  // const clearTimer = (e) => {
-  //   // If you adjust it you should also need to
-  //   // adjust the Endtime formula we are about
-  //   // to code next
-  //   setTimer("00:00:10");
+    setBoard(arr[0])
+    setMatrix(arr[1])
+  },[])
 
-  //   // If you try to remove this line the
-  //   // updating of timer Variable will be
-  //   // after 1000ms or 1sec
-  //   if (Ref.current) clearInterval(Ref.current);
-  //   const id = setInterval(() => {
-  //     startTimer(e);
-  //   }, 1000);
-  //   Ref.current = id;
-  // };
-
-  // const getDeadTime = () => {
-  //   let deadline = new Date();
-
-  //   // This is where you need to adjust if
-  //   // you entend to add more time
-  //   deadline.setSeconds(deadline.getSeconds() + 10);
-  //   return deadline;
-  // };
-
-  // useEffect(() => {
-  //   clearTimer(getDeadTime());
-  // }, []);
-
-  // // Another way to call the clearTimer() to start
-  // // the countdown is via action event from the
-  // // button first we create function to be called
-  // // by the button
-  // const onClickReset = () => {
-  //   clearTimer(getDeadTime());
-  // };
-
-
-  let board = [
-    [0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,0,0],
-  ]
-
-
-  Sudoku.fillDiagonal(board)
-  Sudoku.solveBoard(board)
-
-  var solvedSudoku = [];
-
-  for (var i = 0; i < board.length; i++)
-      solvedSudoku[i] = board[i].slice();
-  
-  
-  Sudoku.removeKDigits(30, solvedSudoku)
-  console.log(board)
-
-  for(let i=0; i<9; i++){
-    for(let j=0; j<9; j++){
-      if(solvedSudoku[i][j]===0){
-        solvedSudoku[i][j]=null
-      }
-    }
-  }
-
-  const [matrix, setMatrix]= useState(solvedSudoku)
-
+  const [matrix, setMatrix]= useState([])
+  const [board, setBoard]= useState([])
+  console.log(matrix, board)
  
   // // console.log(matrix);
   // let cords =[]
@@ -183,7 +123,6 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
         <div>
           <button>Reset</button>
-          <span>{timer}</span>
         </div>
       </header>
       <Container>

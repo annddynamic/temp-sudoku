@@ -3,7 +3,9 @@ import "./App.css";
 import React, { useState, useRef, useEffect } from "react";
 import { Container, Row, Col, Button, Alert } from "react-bootstrap";
 import Sudoku, { randomGenerator } from "./sudoku";
-
+// per easy 30
+// per medium 40
+// per hard 55
 function App() {
   const [cords, setCords] = useState([]);
 
@@ -18,8 +20,6 @@ function App() {
   const [board, setBoard] = useState([]);
   const [lifes, setLifes] = useState();
 
-  // // console.log(matrix);
-  // let cords =[]
   const select = (a, b) => {
     console.log(a, b);
     setCords([a, b]);
@@ -47,8 +47,9 @@ function App() {
       for (var y = 0; y < arr2.length; y++) {
         if (arr1[x][0] == arr2[y][0] && arr1[x][1] == arr2[y][1]) {
           console.log("Bac u kry!");
-          // setShow(true)
-          // setError("Mut e ki bo");
+          setShow(true)
+          setMessage("Correct");
+          setGuess("success")
         }
       }
     }
@@ -78,9 +79,9 @@ function App() {
           setLifes((prevState) => prevState - 1);
           console.log("e hupe lojen");
           setShow(true);
-          setError("Mut e ki bo");
+          setMessage("Mut e ki bo");
+          setGuess("danger")
 
-          // start new game
         }
       } else {
         // tell user to select box
@@ -95,7 +96,8 @@ function App() {
   };
 
   const [show, setShow] = useState(false);
-  const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
+  const [guess, setGuess] = useState("danger")
 
   return (
     <div className="App">
@@ -141,7 +143,7 @@ function App() {
           </Col>
           <Col>
             <Container>
-              <Button className="form-control" onClick={newGame}>
+              <Button className="form-control " onClick={newGame}>
                 New Game
               </Button>
               <Row md={3}>
@@ -157,11 +159,11 @@ function App() {
                   );
                 })}
               </Row>
-              <Alert show={show} variant="danger">
-                <Alert.Heading>{error}</Alert.Heading>
-              </Alert>
             </Container>
           </Col>
+              <Alert show={show} variant={guess}>
+                <Alert.Heading>{message}</Alert.Heading>
+              </Alert>
         </Row>
       </Container>
     </div>

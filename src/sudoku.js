@@ -7,7 +7,7 @@ const Sudoku = (function () {
     let unSolvedBoard=[]
 
       
-    function newGame(){
+    function newGame(difficulty){
 
         board = [
             [0,0,0,0,0,0,0,0,0],

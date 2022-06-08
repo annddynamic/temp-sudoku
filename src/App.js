@@ -49,7 +49,6 @@ function App() {
       for (var y = 0; y < arr2.length; y++) {
         if (arr1[x][0] == arr2[y][0] && arr1[x][1] == arr2[y][1]) {
           return true
-         
         }
       }
     }
@@ -59,40 +58,46 @@ function App() {
   const [numbers, setNumbers] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9]);
 
   const nita = (number) => {
-    console.log(typeof cords, cords);
     //check lifes
     if (lifes !== 0) {
       // check if cordinates are set
       if (cords.length === 2) {
-        // check if correct
-        if (board[cords[0]][cords[1]] === number) {
-          appendToSolvedSudoku(cords[0], cords[1], number);
-          setToFind((prevState) => prevState - 1);
-          if(toFind ===1){
-            if (arraysAreIdentical(matrix, board)) {
-              console.log("Bac u kry");
-              setShow(true)
-              setMessage("Correct");
-              setGuess("success")
+        //check if cell is set
+        if(matrix[cords[0]][cords[1]]===null){
+          if (board[cords[0]][cords[1]] === number) {
+            appendToSolvedSudoku(cords[0], cords[1], number);
+            setToFind((prevState) => prevState - 1);
+            if(toFind ===1){
+              if (arraysAreIdentical(matrix, board)) {
+                console.log("Bac u kry");
+                setShow(true)
+                setMessage("Correct");
+                setGuess("success")
+              }
             }
+          } else {
+            // tell user wrong answer
+            if (lifes > 1) {
+              setLifes((prevState) => prevState - 1);
+              return;
+            }
+            // game over
+            setLifes((prevState) => prevState - 1);
+  
+            setShow(true);
+            setMessage("Mut e ki bo");
+            setGuess("danger")
+  
           }
         } else {
-          // tell user wrong answer
-          if (lifes > 1) {
-            setLifes((prevState) => prevState - 1);
-            return;
-          }
-          // game over
-          setLifes((prevState) => prevState - 1);
-          console.log("e hupe lojen");
+          // tell user to select box
           setShow(true);
-          setMessage("Mut e ki bo");
+          setMessage("Select an empty box in order to play");
           setGuess("danger")
-
         }
-      } else {
-        // tell user to select box
-      }
+        }
+        // check if correct
+       
     }
   };
   const newGame = () => {

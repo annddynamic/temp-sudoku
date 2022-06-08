@@ -9,7 +9,7 @@ function App() {
 
   // // The state for our timer
   const [timer, setTimer] = useState("00:00:00");
-  const [selectedCell, setSelectedCell] = useState(null)
+  const [cords, setCords] = useState([])
 
 // setSelectedCell([i,j])
   const getTimeRemaining = (e) => {
@@ -116,10 +116,11 @@ function App() {
 
  
   // // console.log(matrix);
-  let cords =[]
+  // let cords =[]
   const select = (a , b) => {
     console.log(a,b)
-    cords = [a,b]
+    setCords([a,b])
+    // setSelectedCell([a,b])
     // clearPreviousSelectedCell()
     // selectCell(a,b)
   };
@@ -164,6 +165,7 @@ function App() {
     if( cords.length === 2){
       // check if correct
       if(board[cords[0]][cords[1]]===number){
+        
         appendToSolvedSudoku(cords[0], cords[1], number)
       }else{
         // tell user wrong answer
@@ -197,7 +199,7 @@ function App() {
                           <Col
                             onClick={() => select(i, j)}
                             key={j}
-                            className={`default`}
+                            className={`${ cords[0] ===i  && cords[1]===j? "clicked" : "default"}`}
                           >
                             {column}
                           </Col>

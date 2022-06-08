@@ -33,7 +33,10 @@
 }
 
 .clicked {
+  border: 1px solid #61dafb;
+  padding: 16px;
   background-color: lightgrey;
+  
 }
 
 .moves{

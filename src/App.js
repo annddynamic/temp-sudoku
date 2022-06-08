@@ -43,17 +43,6 @@ function App() {
     setMatrix(newState);
   };
 
-  function arraysAreIdentical(arr1, arr2) {
-    for (var x = 0; x < arr1.length; x++) {
-      //Iterate through all elements in second array
-      for (var y = 0; y < arr2.length; y++) {
-        if (arr1[x][0] == arr2[y][0] && arr1[x][1] == arr2[y][1]) {
-          return true
-        }
-      }
-    }
-    return false
-  }
   // initialize numbers array
   const [numbers, setNumbers] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9]);
 

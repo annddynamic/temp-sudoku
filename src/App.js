@@ -41,14 +41,12 @@ function App() {
     setMatrix(newState);
   };
 
-
   function arraysAreIdentical(arr1, arr2) {
     for (var x = 0; x < arr1.length; x++) {
       //Iterate through all elements in second array
       for (var y = 0; y < arr2.length; y++) {
-       
         if (arr1[x][0] == arr2[y][0] && arr1[x][1] == arr2[y][1]) {
-          console.log("Bac u kry!")
+          console.log("Bac u kry!");
           // setShow(true)
           // setError("Mut e ki bo");
         }
@@ -61,42 +59,43 @@ function App() {
   const nita = (number) => {
     console.log(typeof cords, cords);
     //check lifes
-    // check if cordinates are set
-    if (cords.length === 2) {
-      // check if correct
-      if (board[cords[0]][cords[1]] === number) {
-        appendToSolvedSudoku(cords[0], cords[1], number);
-        if (arraysAreIdentical(matrix, board)) {
-          console.log("AAAAAAA");
+    if (lifes !== 0) {
+      // check if cordinates are set
+      if (cords.length === 2) {
+        // check if correct
+        if (board[cords[0]][cords[1]] === number) {
+          appendToSolvedSudoku(cords[0], cords[1], number);
+          if (arraysAreIdentical(matrix, board)) {
+            console.log("AAAAAAA");
+          }
+        } else {
+          // tell user wrong answer
+          if (lifes > 1) {
+            setLifes((prevState) => prevState - 1);
+            return;
+          }
+          // game over
+          setLifes((prevState) => prevState - 1);
+          console.log("e hupe lojen");
+          setShow(true);
+          setError("Mut e ki bo");
+
+          // start new game
         }
       } else {
-        // tell user wrong answer
-        if (lifes > 1) {
-          setLifes((prevState) => prevState - 1);
-          return;
-        }
-        // game over
-        console.log("e hupe lojen");
-        setShow(true)
-        setError("Mut e ki bo");
-        
-        // start new game
-      
+        // tell user to select box
       }
-    } else {
-      // tell user to select box
-     
     }
   };
-  const newGame = ( ) => {
+  const newGame = () => {
     Sudoku.newGame();
     setBoard(Sudoku.getSolvedBoard());
     setMatrix(Sudoku.getUnsolvedBoard());
     setLifes(5);
-  }
+  };
 
   const [show, setShow] = useState(false);
-	const [error, setError] = useState("");
+  const [error, setError] = useState("");
 
   return (
     <div className="App">
@@ -142,7 +141,9 @@ function App() {
           </Col>
           <Col>
             <Container>
-              <Button className="form-control" onClick={newGame}>New Game</Button>
+              <Button className="form-control" onClick={newGame}>
+                New Game
+              </Button>
               <Row md={3}>
                 {numbers.map((number) => {
                   return (
@@ -158,7 +159,7 @@ function App() {
               </Row>
               <Alert show={show} variant="danger">
                 <Alert.Heading>{error}</Alert.Heading>
-              </Alert>     
+              </Alert>
             </Container>
           </Col>
         </Row>

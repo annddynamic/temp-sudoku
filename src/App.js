@@ -68,12 +68,10 @@ function App() {
             appendToSolvedSudoku(cords[0], cords[1], number);
             setToFind((prevState) => prevState - 1);
             if(toFind ===1){
-              if (arraysAreIdentical(matrix, board)) {
-                console.log("Bac u kry");
-                setShow(true)
-                setMessage("Correct");
-                setGuess("success")
-              }
+              console.log("Bac u kry");
+              setShow(true)
+              setMessage("Correct");
+              setGuess("success")
             }
           } else {
             // tell user wrong answer

@@ -159,13 +159,20 @@ function App() {
   )
 
   const nita = (number)=>{
-    console.log(cords[0])
-    console.log(cords, board[cords[0]][cords[1]])
-    
-    if(board[cords[0]][cords[1]]===number){
-      appendToSolvedSudoku(cords[0], cords[1], number)
+    console.log(typeof cords, cords)
+    // check if cordinates are set
+    if( cords.length === 2){
+      // check if correct
+      if(board[cords[0]][cords[1]]===number){
+        appendToSolvedSudoku(cords[0], cords[1], number)
+      }else{
+        // tell user wrong answer
+        console.log('ba')
+      }
+    }else{
+      // tell user to select box
+      console.log('gabim')
     }
-    // if()
   }
 
   return (

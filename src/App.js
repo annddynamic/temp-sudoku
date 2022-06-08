@@ -9,7 +9,9 @@ function App() {
 
   // // The state for our timer
   const [timer, setTimer] = useState("00:00:00");
+  const [selectedCell, setSelectedCell] = useState(null)
 
+// setSelectedCell([i,j])
   const getTimeRemaining = (e) => {
     const total = Date.parse(e) - Date.parse(new Date());
     const seconds = Math.floor((total / 1000) % 60);
@@ -102,113 +104,22 @@ function App() {
   Sudoku.removeKDigits(30, solvedSudoku)
   console.log(board)
 
+  for(let i=0; i<9; i++){
+    for(let j=0; j<9; j++){
+      if(solvedSudoku[i][j]===0){
+        solvedSudoku[i][j]=null
+      }
+    }
+  }
+
   const [matrix, setMatrix]= useState(solvedSudoku)
 
-  // const [matrix, setMatrix] = useState([
-  //   [
-  //     { v: 0, isClicked: true },
-  //     { v: 0, isClicked: false },
-  //     { v: 0, isClicked: false },
-  //     { v: 0, isClicked: false },
-  //     { v: 0, isClicked: false },
-  //     { v: 0, isClicked: false },
-  //     { v: 0, isClicked: false },
-  //     { v: 0, isClicked: false },
-  //     { v: 0, isClicked: false },
-  //   ],
-  //   [
-  //     { v: 0, isClicked: false },
-  //     { v: 0, isClicked: false },
-  //     { v: 0, isClicked: false },
-  //     { v: 0, isClicked: false },
-  //     { v: 0, isClicked: false },
-  //     { v: 0, isClicked: false },
-  //     { v: 0, isClicked: false },
-  //     { v: 0, isClicked: false },
-  //     { v: 0, isClicked: false },
-  //   ],
-  //   [
-  //     { v: 9, isClicked: false },
-  //     { v: 0, isClicked: false },
-  //     { v: 0, isClicked: false },
-  //     { v: 0, isClicked: false },
-  //     { v: 0, isClicked: false },
-  //     { v: 0, isClicked: false },
-  //     { v: 0, isClicked: false },
-  //     { v: 0, isClicked: false },
-  //     { v: 0, isClicked: false },
-  //   ],
-  //   [
-  //     { v: 0, isClicked: false },
-  //     { v: 0, isClicked: false },
-  //     { v: 0, isClicked: false },
-  //     { v: 0, isClicked: false },
-  //     { v: 0, isClicked: false },
-  //     { v: 0, isClicked: false },
-  //     { v: 0, isClicked: false },
-  //     { v: 0, isClicked: false },
-  //     { v: 0, isClicked: false },
-  //   ],
-  //   [
-  //     { v: 0, isClicked: false },
-  //     { v: 0, isClicked: false },
-  //     { v: 0, isClicked: false },
-  //     { v: 0, isClicked: false },
-  //     { v: 0, isClicked: false },
-  //     { v: 0, isClicked: false },
-  //     { v: 0, isClicked: false },
-  //     { v: 0, isClicked: false },
-  //     { v: 0, isClicked: false },
-  //   ],
-  //   [
-  //     { v: 0, isClicked: false },
-  //     { v: 0, isClicked: false },
-  //     { v: null, isClicked: false },
-  //     { v: 0, isClicked: false },
-  //     { v: 0, isClicked: false },
-  //     { v: 0, isClicked: false },
-  //     { v: 0, isClicked: false },
-  //     { v: 0, isClicked: false },
-  //     { v: 0, isClicked: false },
-  //   ],
-  //   [
-  //     { v: 0, isClicked: false },
-  //     { v: 0, isClicked: false },
-  //     { v: 0, isClicked: false },
-  //     { v: 0, isClicked: false },
-  //     { v: 0, isClicked: false },
-  //     { v: 0, isClicked: false },
-  //     { v: 0, isClicked: false },
-  //     { v: 0, isClicked: false },
-  //     { v: 0, isClicked: false },
-  //   ],
-  //   [
-  //     { v: 0, isClicked: false },
-  //     { v: 0, isClicked: false },
-  //     { v: 0, isClicked: false },
-  //     { v: 0, isClicked: false },
-  //     { v: 0, isClicked: false },
-  //     { v: 0, isClicked: false },
-  //     { v: 0, isClicked: false },
-  //     { v: 0, isClicked: false },
-  //     { v: 0, isClicked: false },
-  //   ],
-  //   [
-  //     { v: 0, isClicked: false },
-  //     { v: 0, isClicked: false },
-  //     { v: 0, isClicked: false },
-  //     { v: 0, isClicked: false },
-  //     { v: 0, isClicked: false },
-  //     { v: 0, isClicked: false },
-  //     { v: 0, isClicked: false },
-  //     { v: 0, isClicked: false },
-  //     { v: 0, isClicked: false },
-  //   ],
-  // ]);
+ 
   // // console.log(matrix);
-
+  let cords =[]
   const select = (a , b) => {
     console.log(a,b)
+    cords = [a,b]
     // clearPreviousSelectedCell()
     // selectCell(a,b)
   };
@@ -226,21 +137,20 @@ function App() {
   //   setMatrix(newState)
   // }
 
-  // const selectCell= (a, b)=>{
+  const appendToSolvedSudoku= (a, b, number)=>{
 
-  //   let newState=[]
-  //   for(let i=0; i<matrix.length; i++){
-  //     if(i===a){
-  //       for(let j=0; j<matrix.length; j++){
-  //         if(j ===b){
-  //           matrix[i][j].isClicked=!matrix[i][j].isClicked
-  //         }
-  //       }
-  //     }
-  //     newState.push(matrix[i])
-  //   }
-  //   setMatrix(newState)
-  // }
+    let newState=[]
+    for(let i=0; i<matrix.length; i++){
+      if(i===a){
+        for(let j=0; j<matrix.length; j++){
+          if(j ===b){
+            matrix[i][j]=number          }
+        }
+      }
+      newState.push(matrix[i])
+    }
+    setMatrix(newState)
+  }
 
 
   // initialize numbers array
@@ -248,8 +158,14 @@ function App() {
     [1,2,3,4,5,6,7,8,9]
   )
 
-  const nita = (numbers)=>{
-    console.log(numbers)
+  const nita = (number)=>{
+    console.log(cords[0])
+    console.log(cords, board[cords[0]][cords[1]])
+    
+    if(board[cords[0]][cords[1]]===number){
+      appendToSolvedSudoku(cords[0], cords[1], number)
+    }
+    // if()
   }
 
   return (

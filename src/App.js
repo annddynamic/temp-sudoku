@@ -8,47 +8,12 @@ function App() {
 
   const [cords, setCords] = useState([])
 
-
-
-
-  // let board = [
-  //   [0,0,0,0,0,0,0,0,0],
-  //   [0,0,0,0,0,0,0,0,0],
-  //   [0,0,0,0,0,0,0,0,0],
-  //   [0,0,0,0,0,0,0,0,0],
-  //   [0,0,0,0,0,0,0,0,0],
-  //   [0,0,0,0,0,0,0,0,0],
-  //   [0,0,0,0,0,0,0,0,0],
-  //   [0,0,0,0,0,0,0,0,0],
-  //   [0,0,0,0,0,0,0,0,0],
-  // ]
-
-
-  // Sudoku.fillDiagonal(board)
-  // Sudoku.solveBoard(board)
-
-  // var solvedSudoku = [];
-
-  // for (var i = 0; i < board.length; i++)
-  //     solvedSudoku[i] = board[i].slice();
-  
-  
-  // Sudoku.removeKDigits(30, solvedSudoku)
-  // console.log(board)
-
-  // for(let i=0; i<9; i++){
-  //   for(let j=0; j<9; j++){
-  //     if(solvedSudoku[i][j]===0){
-  //       solvedSudoku[i][j]=null
-  //     }
-  //   }
-  // }
   useEffect(()=>{
-    // console.log("useeffect")
-    let arr =Sudoku.newGame()
 
-    setBoard(arr[0])
-    setMatrix(arr[1])
+    let arr =Sudoku.newGame()
+    setBoard(Sudoku.getSolvedBoard())
+    setMatrix(Sudoku.getUnsolvedBoard())
+    
   },[])
 
   const [matrix, setMatrix]= useState([])

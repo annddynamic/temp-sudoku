@@ -3,12 +3,13 @@ const Sudoku = (function () {
 
 
     const GRIDSIZE=9;
+    let board=[]
+    let unSolvedBoard=[]
 
       
     function newGame(){
 
-        let unSolvedBoard=[]
-        let board = [
+        board = [
             [0,0,0,0,0,0,0,0,0],
             [0,0,0,0,0,0,0,0,0],
             [0,0,0,0,0,0,0,0,0],
@@ -19,8 +20,9 @@ const Sudoku = (function () {
             [0,0,0,0,0,0,0,0,0],
             [0,0,0,0,0,0,0,0,0],
         ]
+
         fillDiagonal(board)
-        console.log("a")
+
         solveBoard(board)
         
         for (var i = 0; i < board.length; i++){
@@ -38,18 +40,15 @@ const Sudoku = (function () {
             }
         }
 
-        let arr = [board, unSolvedBoard]
-
-        return arr
     }
 
-    // function getSolvedBoard(){
-    //     return board
-    // }
+    function getSolvedBoard(){
+        return board
+    }
 
-    // function getUnsolvedBoard(){
-    //     return unSolvedBoard
-    // }
+    function getUnsolvedBoard(){
+        return unSolvedBoard
+    }
    
     function randomNumberGenerator(n) {
         return  Math.floor(Math.random()*n+1)
@@ -172,11 +171,9 @@ const Sudoku = (function () {
     }
 
     return {
-       fillDiagonal,
-       randomNumberGenerator,
-       solveBoard,
-       removeKDigits,
        newGame,
+       getSolvedBoard,
+       getUnsolvedBoard
     };
 })();
 

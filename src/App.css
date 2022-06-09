@@ -28,21 +28,21 @@
 
 .default {
   border: 1px solid cornflowerblue;
-  padding: 16px;
-  transition: 0.2s;
-  height: 50px;
+  padding: 14.5px;
+  /* transition: 0.2s; */
+  /* height: 50px; */
 }
 
 .clicked {
-  border: 2px solid cornflowerblue;
-  padding: 16px;
+  border: 1px solid cornflowerblue;
+  padding: 14.5px;
   background-color: lightgray;
-  transform: scale(1.1);
-  border-radius: 5px;
+  /* transform: scale(1.1); */
+  /* border-radius: 5px; */
 }
 .default:hover {
   background-color: lightgray;
-  transform: scale(1.05);
+  /* transform: scale(1.05); */
   border-radius: 5px;
 }
 .moves {
@@ -53,7 +53,7 @@
   background-color: white;
   transition: 0.2s;
   border-radius: 10px;
-  margin: 2px;
+  /* margin: 2px; */
 }
 .box {
   border: 1px solid black;

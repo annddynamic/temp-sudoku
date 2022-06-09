@@ -155,9 +155,9 @@ function App() {
           </Dropdown>
         </div>
       </header>
-      <Container>
+      <Container> 
         <Row className=" p-5 ">
-          <Col className="  pr-5 mr-5 ">
+          <Col  md={{span:5}} className="pr-5">
             <Row
               style={{ cursor: "pointer", border: "1px solid cornflowerblue" }}
               xs={1}
@@ -189,8 +189,7 @@ function App() {
               })}
             </Row>
           </Col>
-          <Col md={1}></Col>
-          <Col sm={5}>
+          <Col md={{ span: 5, offset: 2 }}>
             <Container>
               <Button
                 className="form-control mb-3"
@@ -200,7 +199,7 @@ function App() {
               </Button>
 
               <Row
-                sm={9}
+                md={3}
                 // className="box"
               >
                 {numbers.map((number) => {

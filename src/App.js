@@ -159,13 +159,18 @@ function App() {
         <Row className=" p-5 ">
           <Col  md={{span:5}} className="pr-5">
             <Row
-              style={{ cursor: "pointer", border: "1px solid cornflowerblue" }}
+             style={{
+              cursor: "pointer",
+              border: "1px solid cornflowerblue ",
+              borderLeft: "2px solid black",
+              borderBottom: "2px solid black",
+            }}
               xs={1}
               md={9}
             >
               {matrix.map((row, i) => {
                 return (
-                  <Col key={i}>
+                  <Col key={i} className={i % 3 === 0 ? "matrixCol" : ""}>
                     <Row md={9}>
                       {row.map((column, j) => {
                         console.log(column, j);
@@ -175,8 +180,8 @@ function App() {
                             key={j}
                             className={
                               cords[0] === i && cords[1] === j
-                                ? "clicked "
-                                : "default "
+                                ? "clicked matrixRow "
+                                : "default matrixRow"
                             }
                           >
                             {column}

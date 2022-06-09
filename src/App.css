@@ -73,3 +73,12 @@
 .matrixTxt {
   font-size: large;
 }
+
+.matrixRow:nth-child(3n) {
+  border-right: 2px solid black;
+  /* border-bottom: 3px solid black; */
+}
+
+.matrixCol {
+  border-top: 2px solid black;
+}

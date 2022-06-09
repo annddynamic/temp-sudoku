@@ -5,7 +5,6 @@ import { Container, Row, Col, Button, Alert, Dropdown } from "react-bootstrap";
 import Sudoku from "./sudoku";
 
 function App() {
-
   /*
   
     ******  DIFFICULTY  ******
@@ -18,7 +17,6 @@ function App() {
   
   */
 
-
   useEffect(() => {
     // Start new Game with beginner difficulty
     Sudoku.newGame(30);
@@ -26,7 +24,7 @@ function App() {
     setMatrix(Sudoku.getUnsolvedBoard());
     setCurrentDifficulty(30);
     setToFind(30);
-    setLifes(5);
+    setLives(5);
     setShow(false);
   }, []);
 
@@ -35,7 +33,7 @@ function App() {
   const [numbers, setNumbers] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9]);
   const [cords, setCords] = useState([]);
   const [toFind, setToFind] = useState();
-  const [lifes, setLifes] = useState();
+  const [lives, setLives] = useState();
   const [show, setShow] = useState(false);
   const [message, setMessage] = useState("");
   const [guess, setGuess] = useState("danger");
@@ -63,8 +61,8 @@ function App() {
   }
 
   function play(number) {
-    //check lifes
-    if (lifes !== 0) {
+    //check lives
+    if (lives !== 0) {
       // check if cordinates are set
       if (cords.length > 0) {
         //check if cell is valid to insert number
@@ -83,11 +81,11 @@ function App() {
           } else {
             // tell user wrong answer
             notify("Wrong!", "danger");
-            if (lifes > 1) {
-              setLifes((prevState) => prevState - 1);
+            if (lives > 1) {
+              setLives((prevState) => prevState - 1);
             } else {
               // game over, notify user
-              setLifes((prevState) => prevState - 1);
+              setLives((prevState) => prevState - 1);
               notify("You lost! Try again!", "danger");
             }
           }
@@ -107,7 +105,7 @@ function App() {
     setToFind(currentDifficulty);
     setBoard(Sudoku.getSolvedBoard());
     setMatrix(Sudoku.getUnsolvedBoard());
-    setLifes(5);
+    setLives(5);
     setShow(false);
   }
 
@@ -117,11 +115,21 @@ function App() {
     setShow(false);
   }
 
+  const onMatrixClick = (i, j) => {
+    if (matrix[i][j] !== null) {
+      notify("This field is set!", "danger");
+      setCords([]);
+    } else {
+      notify("", "");
+      setCords([i, j]);
+    }
+  };
+
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <h2>Lifes left: {lifes} out of 5</h2>
+        <h2>Lives left: {lives} out of 5</h2>
         <div>
           <Dropdown>
             <Dropdown.Toggle variant="success" id="dropdown-basic">
@@ -148,13 +156,10 @@ function App() {
         </div>
       </header>
       <Container>
-        <Alert className="mt-5" show={show} variant={guess}>
-          <Alert.Heading>{message}</Alert.Heading>
-        </Alert>
-        <Row className="p-5 ">
-          <Col>
+        <Row className=" p-5 ">
+          <Col className="  pr-5 mr-5 ">
             <Row
-              style={{ cursor: "pointer", border: "1px solid #61dafb" }}
+              style={{ cursor: "pointer", border: "1px solid cornflowerblue" }}
               xs={1}
               md={9}
             >
@@ -163,15 +168,16 @@ function App() {
                   <Col key={i}>
                     <Row md={9}>
                       {row.map((column, j) => {
+                        console.log(column, j);
                         return (
                           <Col
-                            onClick={() => setCords([i, j])}
+                            onClick={() => onMatrixClick(i, j)}
                             key={j}
-                            className={`${
+                            className={
                               cords[0] === i && cords[1] === j
-                                ? "clicked"
-                                : "default"
-                            }`}
+                                ? "clicked "
+                                : "default "
+                            }
                           >
                             {column}
                           </Col>
@@ -183,15 +189,20 @@ function App() {
               })}
             </Row>
           </Col>
-          <Col>
+          <Col md={1}></Col>
+          <Col sm={5}>
             <Container>
               <Button
-                className="form-control "
+                className="form-control mb-3"
                 onClick={() => newGame(currentDifficulty)}
               >
                 New Game
               </Button>
-              <Row md={3}>
+
+              <Row
+                sm={9}
+                // className="box"
+              >
                 {numbers.map((number) => {
                   return (
                     <Col
@@ -199,7 +210,7 @@ function App() {
                       key={number}
                       className="moves"
                     >
-                      {number}
+                      <p className="boxText">{number}</p>
                     </Col>
                   );
                 })}
@@ -207,6 +218,9 @@ function App() {
             </Container>
           </Col>
         </Row>
+        <Alert className="mt-5" show={show} variant={guess}>
+          <Alert.Heading>{message}</Alert.Heading>
+        </Alert>
       </Container>
     </div>
   );

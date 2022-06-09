@@ -13,7 +13,6 @@
   }
 }
 
-
 .App-link {
   color: #61dafb;
 }
@@ -28,21 +27,49 @@
 }
 
 .default {
-  border: 1px solid #61dafb;
+  border: 1px solid cornflowerblue;
   padding: 16px;
+  transition: 0.2s;
+  height: 50px;
 }
 
 .clicked {
-  border: 1px solid #61dafb;
+  border: 2px solid cornflowerblue;
   padding: 16px;
-  background-color: lightgrey;
-  
+  background-color: lightgray;
+  transform: scale(1.1);
+  border-radius: 5px;
 }
-
-.moves{
+.default:hover {
+  background-color: lightgray;
+  transform: scale(1.05);
+  border-radius: 5px;
+}
+.moves {
   cursor: pointer;
-  padding: 60px;
-  border: 1px solid #61dafb;
-  background-color:white;
-  
+  padding: 50px;
+  border: 2px solid lightgrey;
+  text-shadow: #61dafb;
+  background-color: white;
+  transition: 0.2s;
+  border-radius: 10px;
+  margin: 2px;
+}
+.box {
+  border: 1px solid black;
+  padding: 5px;
+  border-radius: 10px;
+}
+.moves:hover {
+  background-color: cornflowerblue;
+  color: white;
+  transform: scale(1.1);
+}
+.boxText {
+  font-size: large;
+  font-weight: bold;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+}
+.matrixTxt {
+  font-size: large;
 }

@@ -159,24 +159,29 @@ function App() {
         <Row className=" p-5 ">
           <Col className="  pr-5 mr-5 ">
             <Row
-              style={{ cursor: "pointer", border: "1px solid cornflowerblue" }}
+              style={{
+                cursor: "pointer",
+                border: "1px solid cornflowerblue ",
+                borderLeft: "2px solid black",
+                borderBottom: "2px solid black",
+              }}
               xs={1}
               md={9}
             >
               {matrix.map((row, i) => {
+                console.log(row, i);
                 return (
-                  <Col key={i}>
-                    <Row md={9}>
+                  <Col key={i} className={i % 3 === 0 ? "matrixCol" : ""}>
+                    <Row md={9} className="">
                       {row.map((column, j) => {
-                        console.log(column, j);
                         return (
                           <Col
                             onClick={() => onMatrixClick(i, j)}
                             key={j}
                             className={
                               cords[0] === i && cords[1] === j
-                                ? "clicked "
-                                : "default "
+                                ? "clicked matrixRow "
+                                : "default matrixRow"
                             }
                           >
                             {column}
@@ -189,8 +194,8 @@ function App() {
               })}
             </Row>
           </Col>
-          <Col md={1}></Col>
-          <Col sm={5}>
+          {/* <Col md={1}></Col> */}
+          <Col md={{ span: 5, offset: 2 }}>
             <Container>
               <Button
                 className="form-control mb-3"

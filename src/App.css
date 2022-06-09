@@ -36,12 +36,13 @@
 .clicked {
   border: 2px solid cornflowerblue;
   padding: 16px;
-  background-color: lightgray;
+  background-color: cornflowerblue;
   transform: scale(1.1);
   border-radius: 5px;
 }
+
 .default:hover {
-  background-color: lightgray;
+  background-color: lightgrey;
   transform: scale(1.05);
   border-radius: 5px;
 }
@@ -55,11 +56,7 @@
   border-radius: 10px;
   margin: 2px;
 }
-.box {
-  border: 1px solid black;
-  padding: 5px;
-  border-radius: 10px;
-}
+
 .moves:hover {
   background-color: cornflowerblue;
   color: white;
@@ -72,4 +69,13 @@
 }
 .matrixTxt {
   font-size: large;
+}
+
+.matrixRow:nth-child(3n) {
+  border-right: 2px solid black;
+  /* border-bottom: 3px solid black; */
+}
+
+.matrixCol {
+  border-top: 2px solid black;
 }

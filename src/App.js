@@ -117,8 +117,6 @@ function App() {
     setShow(false);
   }
 
-  console.log(matrix, board)
-
   return (
     <div className="App">
       <header className="App-header">

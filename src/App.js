@@ -70,13 +70,14 @@ function App() {
             }
           } else {
             // tell user wrong answer
+            notify("Wrong answer!", "danger")
             if (lifes > 1) {
               setLifes((prevState) => prevState - 1);
-              return;
+            }else{
+              // game over, notify user
+              setLifes((prevState) => prevState - 1);
+              notify("You lost! Try again!", "danger")
             }
-            // game over, notify user
-            setLifes((prevState) => prevState - 1);
-            notify("You lost! Try again!", "danger")
           }
         } else {
           // notify user to select box

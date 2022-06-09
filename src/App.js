@@ -6,8 +6,7 @@ import Sudoku, { randomGenerator } from "./sudoku";
 
 
 function App() {
-  const [cords, setCords] = useState([]);
-
+  
   useEffect(() => {
     Sudoku.newGame(30);
     setBoard(Sudoku.getSolvedBoard());
@@ -16,7 +15,8 @@ function App() {
     setToFind(30);
     setLifes(5);
   }, []);
-
+  
+  const [cords, setCords] = useState([]);
   const [toFind, setToFind] = useState();
   const [matrix, setMatrix] = useState([]);
   const [board, setBoard] = useState([]);
@@ -94,14 +94,8 @@ function App() {
   };
 
   const changeDifficulty = (difficulty) => {
-    console.log(difficulty)
     setCurrentDifficulty(difficulty)
-    Sudoku.newGame(difficulty);
-    setToFind(difficulty)
-    setBoard(Sudoku.getSolvedBoard());
-    setMatrix(Sudoku.getUnsolvedBoard());
-    setLifes(5);
-
+    newGame(difficulty)
   };
 
   const [show, setShow] = useState(false);

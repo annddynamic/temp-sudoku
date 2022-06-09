@@ -28,11 +28,6 @@ function App() {
   const [guess, setGuess] = useState("danger");
   const [currentDifficulty, setCurrentDifficulty]= useState()
 
-  function select(a, b){
-    console.log(a, b);
-    setCords([a, b]);
-  };
-
   console.log(board, matrix);
   function appendToMatrix(a, b, number)  {
     let newState = [];
@@ -56,10 +51,11 @@ function App() {
   }
 
   function play(number) {
+    console.log(cords.length)
     //check lifes
     if (lifes !== 0) {
       // check if cordinates are set
-      if (cords.length === 2) {
+      if (cords.length > 0) {
         //check if cell is set
         if (matrix[cords[0]][cords[1]] === null) {
           if (board[cords[0]][cords[1]] === number) {
@@ -82,9 +78,10 @@ function App() {
           }
         } else {
           // notify user to select box
-          setShow(true);
           notify("Select an empty box in order to play!", "danger")
         }
+      }else{
+        notify("Select an empty box in order to play!", "danger")
       }
     }
   };
@@ -138,7 +135,7 @@ function App() {
                       {row.map((column, j) => {
                         return (
                           <Col
-                            onClick={() => select(i, j)}
+                            onClick={() => setCords([i, j])}
                             key={j}
                             className={`${
                               cords[0] === i && cords[1] === j

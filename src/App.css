@@ -35,7 +35,6 @@
 
 .clicked {
   border: 2px solid cornflowerblue;
-  padding: 16px;
   background-color: cornflowerblue;
   transform: scale(1.1);
   border-radius: 5px;

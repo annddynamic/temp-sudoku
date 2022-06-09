@@ -1,11 +1,26 @@
 import logo from "./logo.svg";
 import "./App.css";
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Button, Alert, Dropdown } from "react-bootstrap";
-import Sudoku, { randomGenerator } from "./sudoku";
+import Sudoku from "./sudoku";
 
 function App() {
+
+  /*
+  
+    ******  DIFFICULTY  ******
+
+    Beginner: Find 30 numbers
+    Rookie: Find 45 numbers
+    Medium: Find 50 numbers
+    Hard: Find 58 numbers
+    Legendary: Find 65 numbers
+  
+  */
+
+
   useEffect(() => {
+    // Start new Game with beginner difficulty
     Sudoku.newGame(30);
     setBoard(Sudoku.getSolvedBoard());
     setMatrix(Sudoku.getUnsolvedBoard());
@@ -26,13 +41,12 @@ function App() {
   const [guess, setGuess] = useState("danger");
   const [currentDifficulty, setCurrentDifficulty] = useState();
 
-  console.log(board, matrix);
-  function appendToMatrix(a, b, number) {
+  function appendToMatrix(row, column, number) {
     let newState = [];
     for (let i = 0; i < matrix.length; i++) {
-      if (i === a) {
+      if (i === row) {
         for (let j = 0; j < matrix.length; j++) {
-          if (j === b) {
+          if (j === column) {
             matrix[i][j] = number;
           }
         }
@@ -103,6 +117,8 @@ function App() {
     setShow(false);
   }
 
+  console.log(matrix, board)
+
   return (
     <div className="App">
       <header className="App-header">
@@ -111,17 +127,23 @@ function App() {
         <div>
           <Dropdown>
             <Dropdown.Toggle variant="success" id="dropdown-basic">
-              Difficulty
+              Change difficulty
             </Dropdown.Toggle>
             <Dropdown.Menu>
-              <Dropdown.Item onClick={() => changeDifficulty(1)}>
-                Easy
+              <Dropdown.Item onClick={() => changeDifficulty(30)}>
+                Beginner
               </Dropdown.Item>
-              <Dropdown.Item onClick={() => changeDifficulty(2)}>
+              <Dropdown.Item onClick={() => changeDifficulty(45)}>
+                Rookie
+              </Dropdown.Item>
+              <Dropdown.Item onClick={() => changeDifficulty(50)}>
                 Medium
               </Dropdown.Item>
-              <Dropdown.Item onClick={() => changeDifficulty(3)}>
+              <Dropdown.Item onClick={() => changeDifficulty(58)}>
                 Hard
+              </Dropdown.Item>
+              <Dropdown.Item onClick={() => changeDifficulty(65)}>
+                Legendary
               </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>

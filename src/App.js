@@ -14,21 +14,27 @@ function App() {
     setCurrentDifficulty(30)
     setToFind(30);
     setLifes(5);
+    setShow(false)
   }, []);
   
-  const [cords, setCords] = useState([]);
-  const [toFind, setToFind] = useState();
   const [matrix, setMatrix] = useState([]);
   const [board, setBoard] = useState([]);
+  const [numbers, setNumbers] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+  const [cords, setCords] = useState([]);
+  const [toFind, setToFind] = useState();
   const [lifes, setLifes] = useState();
+  const [show, setShow] = useState(false);
+  const [message, setMessage] = useState("");
+  const [guess, setGuess] = useState("danger");
+  const [currentDifficulty, setCurrentDifficulty]= useState()
 
-  const select = (a, b) => {
+  function select(a, b){
     console.log(a, b);
     setCords([a, b]);
   };
 
   console.log(board, matrix);
-  const appendToSolvedSudoku = (a, b, number) => {
+  function appendToMatrix(a, b, number)  {
     let newState = [];
     for (let i = 0; i < matrix.length; i++) {
       if (i === a) {
@@ -43,10 +49,13 @@ function App() {
     setMatrix(newState);
   };
 
-  // initialize numbers array
-  const [numbers, setNumbers] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+  function notify(message, guess){
+    setShow(true);
+    setMessage(message);
+    setGuess(guess);
+  }
 
-  const nita = (number) => {
+  function play(number) {
     //check lifes
     if (lifes !== 0) {
       // check if cordinates are set
@@ -54,13 +63,12 @@ function App() {
         //check if cell is set
         if (matrix[cords[0]][cords[1]] === null) {
           if (board[cords[0]][cords[1]] === number) {
-            appendToSolvedSudoku(cords[0], cords[1], number);
+            appendToMatrix(cords[0], cords[1], number);
             setToFind((prevState) => prevState - 1);
             if (toFind === 1) {
+              // Game is won, notify user
+              notify("Congratulations, you won!", "success")
               console.log("Bac u kry");
-              setShow(true);
-              setMessage("Correct");
-              setGuess("success");
             }
           } else {
             // tell user wrong answer
@@ -68,46 +76,40 @@ function App() {
               setLifes((prevState) => prevState - 1);
               return;
             }
-            // game over
+            // game over, notify user
             setLifes((prevState) => prevState - 1);
-
-            setShow(true);
-            setMessage("Mut e ki bo");
-            setGuess("danger");
+            notify("You lost! Try again!", "danger")
           }
         } else {
-          // tell user to select box
+          // notify user to select box
           setShow(true);
-          setMessage("Select an empty box in order to play");
-          setGuess("danger");
+          notify("Select an empty box in order to play!", "danger")
         }
       }
     }
   };
 
-  const newGame = (currentDifficulty) => {
+  function newGame(currentDifficulty){
     Sudoku.newGame(currentDifficulty);
     setToFind(currentDifficulty)
     setBoard(Sudoku.getSolvedBoard());
     setMatrix(Sudoku.getUnsolvedBoard());
     setLifes(5);
+    setShow(false)
   };
 
-  const changeDifficulty = (difficulty) => {
+  function changeDifficulty(difficulty) {
     setCurrentDifficulty(difficulty)
     newGame(difficulty)
+    setShow(false)
   };
 
-  const [show, setShow] = useState(false);
-  const [message, setMessage] = useState("");
-  const [guess, setGuess] = useState("danger");
-  const [currentDifficulty, setCurrentDifficulty]= useState()
 
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <div>Lifes left: {lifes} out of 5</div>
+        <img src={logo} className="App-logo"   alt="logo" />
+        <h2>Lifes left: {lifes} out of 5</h2>
         <div>
           <Dropdown>
             <Dropdown.Toggle variant="success" id="dropdown-basic">
@@ -163,7 +165,7 @@ function App() {
                 {numbers.map((number) => {
                   return (
                     <Col
-                      onClick={() => nita(number)}
+                      onClick={() => play(number)}
                       key={number}
                       className="moves"
                     >

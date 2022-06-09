@@ -120,6 +120,12 @@ function App() {
               Difficulty
             </Dropdown.Toggle>
 
+            {/* <Form.Select aria-label="Default select example">
+              <option>Open this select menu</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </Form.Select> */}
             <Dropdown.Menu>
               <Dropdown.Item onClick={()=>changeDifficulty(1)} >Easy</Dropdown.Item>
               <Dropdown.Item onClick={()=>changeDifficulty(2)} >Medium</Dropdown.Item>

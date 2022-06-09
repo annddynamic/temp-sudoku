@@ -25,21 +25,10 @@ const Sudoku = (function () {
 
         solveBoard(board)
         
-        for (var i = 0; i < board.length; i++){
-            unSolvedBoard[i] = board[i].slice();
-        }
-          
+        copySolvedBoard(board)
           
         removeKDigits(difficulty, unSolvedBoard)
-        
-        for(let i=0; i<9; i++){
-            for(let j=0; j<9; j++){
-                if(unSolvedBoard[i][j]===0){
-                    unSolvedBoard[i][j]=null
-                }
-            }
-        }
-
+       
     }
 
     function getSolvedBoard(){
@@ -52,6 +41,12 @@ const Sudoku = (function () {
    
     function randomNumberGenerator(n) {
         return  Math.floor(Math.random()*n+1)
+    }
+
+    function copySolvedBoard(board){
+        for (var i = 0; i < board.length; i++){
+            unSolvedBoard[i] = board[i].slice();
+        }
     }
 
     function unUsedInBox(rowStart, colStart, num, board){
@@ -157,7 +152,7 @@ const Sudoku = (function () {
             // System.out.println(cellId);
             // extract coordinates i  and j
             let i = Math.floor(cellId/GRIDSIZE);
-            let j = cellId%9;
+            let j = cellId%9+1;
             if (j != 0)
                 j = j - 1;
  
@@ -168,6 +163,17 @@ const Sudoku = (function () {
                 board[i][j] = 0;
             }
         }
+
+        // replace 0 with null
+
+        for(let i=0; i<9; i++){
+            for(let j=0; j<9; j++){
+                if(unSolvedBoard[i][j]===0){
+                    unSolvedBoard[i][j]=null
+                }
+            }
+        }
+
     }
 
     return {

@@ -51,20 +51,22 @@ function App() {
   }
 
   function play(number) {
-    console.log(cords.length)
     //check lifes
     if (lifes !== 0) {
       // check if cordinates are set
       if (cords.length > 0) {
-        //check if cell is set
+        //check if cell is valid to insert number
         if (matrix[cords[0]][cords[1]] === null) {
+          //check if correct
           if (board[cords[0]][cords[1]] === number) {
+            // notify user guess correct
+            notify("Correct!", "success")
+            
             appendToMatrix(cords[0], cords[1], number);
             setToFind((prevState) => prevState - 1);
             if (toFind === 1) {
               // Game is won, notify user
               notify("Congratulations, you won!", "success")
-              console.log("Bac u kry");
             }
           } else {
             // tell user wrong answer
@@ -81,6 +83,7 @@ function App() {
           notify("Select an empty box in order to play!", "danger")
         }
       }else{
+        // notify user to select empty box
         notify("Select an empty box in order to play!", "danger")
       }
     }
